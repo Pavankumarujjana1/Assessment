@@ -11,9 +11,9 @@ def process_document(file_path: str) -> dict:
     with open(file_path, "rb") as file:
         header = file.read(4)
 
-    # --------------------
+    
     # Extract text
-    # --------------------
+   
     if header.startswith(b"PK"):
         detected_type = "docx"
         doc = Document(file_path)
@@ -33,9 +33,9 @@ def process_document(file_path: str) -> dict:
 
     text_lower = text.lower()
 
-    # --------------------
+    
     # Categorization
-    # --------------------
+    
     categories = {
         "Resume": ["experience", "education", "skills", "projects"],
         "Invoice": ["invoice", "total", "amount", "gst", "bill"],
@@ -51,9 +51,9 @@ def process_document(file_path: str) -> dict:
     best_category = max(scores, key=scores.get)
     category = best_category if scores[best_category] > 0 else "Unknown"
 
-    # --------------------
+    
     # Final JSON output
-    # --------------------
+
     return {
         "file_path": file_path,
         "detected_type": detected_type,
